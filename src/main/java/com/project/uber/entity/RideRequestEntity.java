@@ -1,8 +1,9 @@
 package com.project.uber.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import com.project.uber.enums.PaymentMethod;
+import com.project.uber.enums.RideRequestStatus;
+import jakarta.persistence.*;
+import org.locationtech.jts.geom.Point;
 
 import java.time.LocalDateTime;
 
@@ -10,9 +11,20 @@ import java.time.LocalDateTime;
 @Table(name = "RIDE_REQUEST")
 public class RideRequestEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private RiderEntity rider;
     private LocalDateTime requestedTime;
     private Double fare;
+    private Point pickupLocation;
+    private Point dropLocation;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    private RideRequestStatus status;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 }

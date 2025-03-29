@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.locationtech.jts.geom.Point;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,5 +25,9 @@ public class UserEntity {
     private String name;
     private String email;
     private String password;
-    private Set<Roles> roles;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<Roles> roles = new HashSet<>();
+    private Point location;
 }

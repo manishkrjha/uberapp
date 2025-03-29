@@ -1,5 +1,6 @@
 package com.project.uber.entity;
 
+import com.project.uber.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,9 +18,13 @@ import java.time.LocalDateTime;
 public class PaymentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private RideEntity ride;
     private LocalDateTime paymentTime;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
 
 }

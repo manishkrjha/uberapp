@@ -1,7 +1,6 @@
 package com.project.uber.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -9,6 +8,8 @@ import java.util.List;
 @Table(name = "WALLET")
 public class WalletEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UserEntity user;
     private Double balance;
