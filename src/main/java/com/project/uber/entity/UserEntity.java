@@ -1,5 +1,6 @@
 package com.project.uber.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.uber.enums.Roles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,5 +30,11 @@ public class UserEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Roles> roles = new HashSet<>();
+
     private Point location;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private WalletEntity wallet;
+
 }

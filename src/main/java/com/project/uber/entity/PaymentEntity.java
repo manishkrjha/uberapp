@@ -20,11 +20,14 @@ public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "ride_id")
     private RideEntity ride;
     private LocalDateTime paymentTime;
 
-    @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private PaymentStatus status;
 
 }

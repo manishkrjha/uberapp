@@ -22,8 +22,15 @@ public class RideEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_id")
     private DriverEntity driver;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rider_id")
     private RiderEntity rider;
+
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String otp;
@@ -31,11 +38,11 @@ public class RideEntity {
     private Point pickupLocation;
     private Point dropLocation;
 
-    @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
-    @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private RideStatus status;
 }
